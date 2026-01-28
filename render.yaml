@@ -1,0 +1,35 @@
+services:
+  - type: web
+    region: frankfurt
+    name: node-backend-monitor
+    runtime: docker
+    plan: free
+    dockerContext: .
+    dockerfilePath: ./Dockerfile.master
+    autoDeploy: true
+    envVars:
+      - key: NODE_ENV
+        value: production
+
+  - type: web
+    region: frankfurt
+    name: node-backend-monitor-worker
+    runtime: docker
+    plan: free
+    dockerContext: .
+    dockerfilePath: ./Dockerfile.worker
+    autoDeploy: true
+    envVars:
+      - key: NODE_ENV
+        value: production
+
+  # - type: worker
+  #   name: my-app-worker
+  #   runtime: docker
+  #   plan: free
+  #   dockerContext: .
+  #   dockerfilePath: ./Dockerfile.worker
+  #   autoDeploy: true
+  #   envVars:
+  #     - key: NODE_ENV
+  #       value: production

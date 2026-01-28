@@ -1,0 +1,19 @@
+.idea/
+.vscode/
+node_modules/
+# dist/
+.vscode/
+/.crt
+/*.crt
+/.cursor
+tmp/
+temp/
+.env
+.env.local
+.env.test
+.env.other
+.env.dev
+.env.test
+
+logs/
+*.log

@@ -1,0 +1,29 @@
+version: "3.8"
+
+services:
+  app:
+    build: .Dockerfile.app
+    image: my-app-master
+    command: pm2-runtime ecosystem.config.js --only app
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+    depends_on:
+      - redis
+
+  worker:
+    build: .Dockerfile.worker
+    image: my-app-worker
+    command: pm2-runtime ecosystem.config.js --only worker
+    deploy:
+      replicas: 4  # Number of worker containers
+      restart_policy:
+        condition: on-failure
+    depends_on:
+      - redis
+
+  redis:
+    image: redis:alpine
+    ports:
+      - "6379:6379"
